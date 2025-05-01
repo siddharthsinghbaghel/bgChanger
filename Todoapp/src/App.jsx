@@ -8,23 +8,26 @@ function App() {
   const [todos, setTodos] = useState([])
 
   const addTodo = (todo) => {
+    //setTodos(todo) => isko likhne se sari purani todos value delete ho jayengi
     setTodos((prev) => [{id: Date.now(), ...todo}, ...prev] )
+    //id: Date.now() => ye unique id generate karega
+    //...todo => ye spread operator hai jo todo ke andar jitne bhi properties hain unhe copy karega
+    //setTodos((prev) => [todo, ...prev]) => isko likhne se purani todos value nahi jayegi
   }
 
   const updateTodo = (id, todo) => {
     setTodos((prev) => prev.map((prevTodo) => (prevTodo.id === id ? todo : prevTodo )))
-
+// => callback function hai jo pehle se hi todos ko update karega
     
   }
+// delete todo me hum ek naya array  bana rahe h jo filter krke sare todo rakhega but jo humne delete kiya hai uske id match ho jaygi to nhi rakhega 
 
   const deleteTodo = (id) => {
-    setTodos((prev) => prev.filter((todo) => todo.id !== id))
+    setTodos((prev) => prev.filter((todo) => todo.id !== id))// unmatched todo id store karega
   }
 
   const toggleComplete = (id) => {
-    //console.log(id);
-    setTodos((prev) => 
-    prev.map((prevTodo) => 
+    setTodos((prev) => prev.map((prevTodo) => 
       prevTodo.id === id ? { ...prevTodo, 
         completed: !prevTodo.completed } : prevTodo))
   }
